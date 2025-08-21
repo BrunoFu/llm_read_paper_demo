@@ -1,0 +1,15 @@
+{
+  "input_pdf": "C:\\Users\\Bru\\Desktop\\Paper\\attention_paper.pdf",
+  "output_dir": "output_complete\\attention_paper",
+  "pdf_name": "attention_paper",
+  "overall_status": "in_progress",
+  "start_time": 1754413667.979035,
+  "end_time": 1754413675.823799,
+  "total_processing_time": 7.844763994216919,
+  "stages": {},
+  "final_report_path": null,
+  "metadata_path": null,
+  "structure_path": null,
+  "success": false,
+  "pipeline_error": null
+}

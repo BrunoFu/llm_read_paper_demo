@@ -1,32 +1,21 @@
-# 基础依赖
-pathlib>=1.0.1
+# Basic dependencies
 tqdm>=4.62.3
 
-# 数据库依赖
-sqlite3
-
-# PDF处理依赖
+# PDF processing dependencies
 PyPDF2>=2.0.0
 pdf2image>=1.16.0
-pypdf>=3.15.1  # 用于PDF裁剪
+pypdf>=3.15.1
 
-# OCR依赖
-# pytesseract>=0.3.9  # 如果使用本地OCR
-# opencv-python>=4.5.5.0  # 如果需要图像处理
-mistralai>=0.0.9  # Mistral OCR API客户端
+# OCR dependencies
+mistralai>=0.0.9
 
-# API依赖
+# API dependencies
 requests>=2.27.1
-openai>=1.0.0  # OpenAI API客户端
+openai>=1.0.0
 
-# LLM相关依赖
-json-repair>=0.4.0  # 用于修复不规范的JSON
-asyncio>=3.4.3  # 异步IO支持
-aiofiles>=0.8.0  # 异步文件操作
+# LLM related dependencies
+json-repair>=0.4.0
+aiofiles>=0.8.0
 
-# 环境变量依赖
-python-dotenv>=0.19.0  # 用于加载.env文件
-
-# 工具依赖
-difflib  # 内置模块
-hashlib  # 内置模块
+# Environment variable dependencies
+python-dotenv>=0.19.0

@@ -233,9 +233,9 @@ async def generate_report(json_result, output_path, reasoner=False, max_concurre
 
         # 系统消息内容
         system_content = f"""以下是论文中章节 \"{section_title}\" 的内容, 请仔细阅读，使用中文完成我的任务，注意将输出内容好好组织一下，用一些markdown排版的语法，比如加粗、无序列表、小标题等。在输出公式时，检查一下公式是否正确（检查是否正确的内容不用输出）。在回答时，直接输出对内容的讲解，不要输出\"好的\"、\"明白了\"、等无意义的内容。当输出行间公式时，采用下面的格式：
-        \[
+        \\[
         公式内容
-        \]
+        \\]
         """
 
         user_prompt = f"请阅读章节 \"{section_title}\"，先讲解其主要内容。"
@@ -252,7 +252,7 @@ async def generate_report(json_result, output_path, reasoner=False, max_concurre
             
         if formulas:
             formulas_str = ", ".join(formulas)
-            user_prompt += f" 此外，请结合文章内容解释以下公式：{formulas_str}。公式输出使用markdown的行间公式格式（\[ ... ]\)。"
+            user_prompt += f" 此外，请结合文章内容解释以下公式：{formulas_str}。公式输出使用markdown的行间公式格式（\\[ ... \\]）。"
 
         user_prompt += "小标题以markdown四级标题（####）格式给出。"
         user_prompt += f" 章节内容：\n{section_content}"

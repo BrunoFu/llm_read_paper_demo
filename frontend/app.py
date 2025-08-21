@@ -390,7 +390,7 @@ def create_demo():
     """
 
     # 创建Gradio界面
-    with gr.Blocks(title=title, css="frontend/static/custom.css") as demo:
+    with gr.Blocks(title=title, css="static/custom.css") as demo:
         gr.Markdown(description)
 
         # 存储当前输出目录的状态变量
@@ -485,6 +485,8 @@ if __name__ == "__main__":
     # 添加Flask路由处理前端错误日志
     from flask import request, jsonify, send_from_directory
 
+    print("应用程序配置完成，准备启动...")
+
     @demo.app.route('/frontend_error_log', methods=['POST'])
     def frontend_error_log():
         try:
@@ -529,32 +531,58 @@ if __name__ == "__main__":
     # 添加manifest.json路由
     @demo.app.route('/manifest.json')
     def manifest():
-        return jsonify({
-            "name": "论文OCR解析系统",
-            "short_name": "论文OCR",
-            "start_url": "/",
-            "display": "standalone",
-            "background_color": "#ffffff",
-            "description": "一个用于解析学术论文的OCR系统",
-            "icons": [
-                {
-                    "src": "static/images/icon.png",
-                    "sizes": "192x192",
-                    "type": "image/png"
-                }
-            ]
-        })
+        try:
+            return send_from_directory('frontend/static', 'manifest.json')
+        except:
+            # 如果文件不存在，返回默认配置
+            return jsonify({
+                "name": "学术论文OCR与智能解析系统",
+                "short_name": "论文OCR",
+                "start_url": "/",
+                "display": "standalone",
+                "background_color": "#ffffff",
+                "theme_color": "#ff6b35",
+                "description": "一个用于解析学术论文的OCR系统",
+                "icons": [
+                    {
+                        "src": "static/images/icon.png",
+                        "sizes": "192x192",
+                        "type": "image/png"
+                    }
+                ]
+            })
+
+    # 添加静态文件处理路由
+    @demo.app.route('/static/<path:filename>')
+    def serve_static_files(filename):
+        try:
+            return send_from_directory('frontend/static', filename)
+        except:
+            return '', 404
 
     # 添加字体文件处理路由
     @demo.app.route('/<path:filename>')
-    def serve_static(filename):
-        if filename.endswith('.woff2') or filename.endswith('.woff'):
+    def serve_other_files(filename):
+        # 处理字体文件和其他静态资源
+        if filename.endswith(('.woff2', '.woff', '.ttf', '.eot', '.css', '.js', '.png', '.jpg', '.jpeg', '.gif', '.svg')):
             try:
-                return send_from_directory('static', filename)
+                # 首先尝试从frontend/static目录
+                return send_from_directory('frontend/static', filename)
             except:
-                # 返回一个空响应，避免404错误
-                return '', 200
+                try:
+                    # 然后尝试从static目录
+                    return send_from_directory('static', filename)
+                except:
+                    # 返回一个空响应，避免404错误
+                    return '', 200
         return '', 404
 
     # 启动Gradio应用
-    demo.launch()
+    demo.launch(
+        server_name="127.0.0.1",
+        server_port=7860,
+        share=False,
+        debug=False,
+        show_error=True,
+        quiet=False
+    )

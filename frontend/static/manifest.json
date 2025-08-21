@@ -1,0 +1,16 @@
+{
+    "name": "学术论文OCR与智能解析系统",
+    "short_name": "论文OCR",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#ff6b35",
+    "description": "一个用于解析学术论文的OCR系统",
+    "icons": [
+        {
+            "src": "static/images/icon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}

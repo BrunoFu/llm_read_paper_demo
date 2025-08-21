@@ -271,8 +271,9 @@ class FSZPaperBatchProcessor:
 async def main():
     """主函数"""
     # 配置路径
-    input_dir = "/Users/fro/Library/CloudStorage/OneDrive-个人/code/fszRA/policy_paper_extract/罗斯福新政影响相关文献"
-    output_dir = "/Users/fro/Library/CloudStorage/OneDrive-个人/code/OCR_api_test/fsz_ra_papers"
+    #input_dir = "/Users/fro/Library/CloudStorage/OneDrive-个人/code/fszRA/policy_paper_extract/罗斯福新政影响相关文献"
+    input_dir = input_dir = r"C:\Users\Bru\Desktop\Paper"
+    output_dir = r"C:/Users/Bru/Desktop/output"
     
     # 创建批量处理器
     processor = FSZPaperBatchProcessor(input_dir, output_dir)
