@@ -1,53 +1,53 @@
-# 🤖 LLM Read Paper - 智能学术论文处理系统
+# 🤖 LLM Read Paper - Intelligent Academic Paper Processing System
 
-一个基于大语言模型的智能学术论文处理系统，能够自动将PDF学术论文转换为结构化分析报告。
+An intelligent academic paper processing system based on large language models, capable of automatically converting PDF academic papers into structured analysis reports.
 
-## ✨ 核心特性
+## ✨ Core Features
 
-- 🔍 **智能OCR处理**：支持MinerU和Mistral AI双OCR引擎
-- 📊 **四阶段流水线**：元数据提取 → 全文OCR → 结构化解析 → 报告生成
-- 🤖 **LLM深度分析**：基于大语言模型的智能内容分析
-- 🌐 **Web用户界面**：基于Gradio的友好交互界面
-- ⚡ **异步处理**：高效的并发处理能力
-- 🔄 **断点续传**：支持中断后继续处理
-- 📈 **实时监控**：完整的进度监控和错误处理
+- 🔍 **Intelligent OCR Processing**: Supports dual OCR engines with MinerU and Mistral AI
+- 📊 **Four-Stage Pipeline**: Metadata extraction → Full-text OCR → Structured parsing → Report generation
+- 🤖 **LLM Deep Analysis**: Intelligent content analysis based on large language models
+- 🌐 **Web User Interface**: Friendly interactive interface based on Gradio
+- ⚡ **Asynchronous Processing**: Efficient concurrent processing capabilities
+- 🔄 **Resume Processing**: Supports continuing processing after interruption
+- 📈 **Real-time Monitoring**: Complete progress monitoring and error handling
 
-## 🏗️ 系统架构
+## 🏗️ System Architecture
 
-### 四阶段处理流水线
+### Four-Stage Processing Pipeline
 
 ```
-PDF输入 → 阶段1：元数据提取 → 阶段2：全文OCR → 阶段3：结构化解析 → 阶段4：报告生成 → 最终输出
+PDF Input → Stage 1: Metadata Extraction → Stage 2: Full-text OCR → Stage 3: Structured Parsing → Stage 4: Report Generation → Final Output
 ```
 
-1. **阶段1：元数据提取** (`crop_pdf_first_three_page/`)
-   - PDF前三页裁剪和OCR
-   - 基于LLM的元数据提取
-   - 论文基本信息识别
+1. **Stage 1: Metadata Extraction** (`crop_pdf_first_three_page/`)
+   - PDF first three pages cropping and OCR
+   - LLM-based metadata extraction
+   - Paper basic information identification
 
-2. **阶段2：全文OCR** (`pdf_content_extractor/`)
-   - 完整PDF文档OCR处理
-   - 图片提取和标题标准化
-   - Markdown格式输出
+2. **Stage 2: Full-text OCR** (`pdf_content_extractor/`)
+   - Complete PDF document OCR processing
+   - Image extraction and title standardization
+   - Markdown format output
 
-3. **阶段3：结构化解析** (`section_data_extractor/`)
-   - 论文框架识别和内容定位
-   - 章节结构化处理
-   - 论文类型分类
+3. **Stage 3: Structured Parsing** (`section_data_extractor/`)
+   - Paper framework recognition and content positioning
+   - Chapter structured processing
+   - Paper type classification
 
-4. **阶段4：报告生成** (`report_generator/`)
-   - 基于LLM的深度分析
-   - 智能报告生成
-   - 多格式输出支持
+4. **Stage 4: Report Generation** (`report_generator/`)
+   - LLM-based deep analysis
+   - Intelligent report generation
+   - Multi-format output support
 
-## 🚀 快速开始
+## 🚀 Quick Start
 
-### 环境要求
+### Requirements
 
 - Python 3.8+
-- 支持的操作系统：macOS, Linux, Windows
+- Supported operating systems: macOS, Linux, Windows
 
-### 安装依赖
+### Install Dependencies
 
 ```bash
 git clone https://github.com/Rostopher/llm_read_paper.git
@@ -55,9 +55,9 @@ cd llm_read_paper
 pip install -r requirements.txt
 ```
 
-### 配置API密钥
+### Configure API Keys
 
-在 `utils/llm_config.py` 中配置您的API密钥：
+Configure your API keys in `utils/llm_config.py`:
 
 ```python
 LLM_CONFIG = {
@@ -70,7 +70,7 @@ LLM_CONFIG = {
 }
 ```
 
-### 🎯 推荐使用方式：封装的流水线服务
+### 🎯 Recommended Usage: Encapsulated Pipeline Service
 
 ```python
 import asyncio
@@ -80,48 +80,48 @@ async def main():
     result = await process_paper_pipeline("your_paper.pdf")
     
     if result.success:
-        print(f"✅ 处理成功！报告路径: {result.final_report_path}")
+        print(f"✅ Processing successful! Report path: {result.final_report_path}")
     else:
-        print(f"❌ 处理失败: {result.pipeline_error}")
+        print(f"❌ Processing failed: {result.pipeline_error}")
 
 asyncio.run(main())
 ```
 
-### Web界面使用
+### Web Interface Usage
 
 ```bash
 cd frontend
 python app.py
-# 访问 http://localhost:7860
+# Visit http://localhost:7860
 ```
 
-## 📁 项目结构
+## 📁 Project Structure
 
 ```
 llm_read_paper/
-├── tools/                          # 🎯 核心封装服务
-│   ├── paper_processing_service.py # 完整四阶段流水线封装
-│   ├── pipeline_models.py          # 数据模型定义
-│   └── example_usage.py            # 使用示例
-├── crop_pdf_first_three_page/       # 阶段1：元数据提取
-├── pdf_content_extractor/           # 阶段2：全文OCR
-├── section_data_extractor/          # 阶段3：结构化解析
-├── report_generator/                # 阶段4：报告生成
-├── frontend/                        # Web用户界面
-├── utils/                           # 工具函数
-├── resources/                       # Prompt模板
-└── example_pdfs/                    # 示例PDF文件
+├── tools/                          # 🎯 Core encapsulated services
+│   ├── paper_processing_service.py # Complete four-stage pipeline encapsulation
+│   ├── pipeline_models.py          # Data model definitions
+│   └── example_usage.py            # Usage examples
+├── crop_pdf_first_three_page/       # Stage 1: Metadata extraction
+├── pdf_content_extractor/           # Stage 2: Full-text OCR
+├── section_data_extractor/          # Stage 3: Structured parsing
+├── report_generator/                # Stage 4: Report generation
+├── frontend/                        # Web user interface
+├── utils/                           # Utility functions
+├── resources/                       # Prompt templates
+└── example_pdfs/                    # Sample PDF files
 ```
 
-## 📖 详细文档
+## 📖 Detailed Documentation
 
-- [新工程师快速入门指南](新工程师快速入门指南.md)
-- [项目功能分析报告](项目功能分析报告.md)
-- [项目总结报告](项目总结报告.md)
+- [New Engineer Quick Start Guide](新工程师快速入门指南.md)
+- [Project Function Analysis Report](项目功能分析报告.md)
+- [Project Summary Report](项目总结报告.md)
 
-## 🔧 高级用法
+## 🔧 Advanced Usage
 
-### 自定义配置
+### Custom Configuration
 
 ```python
 from tools.paper_processing_service import process_paper_pipeline
@@ -137,7 +137,7 @@ config = PipelineConfig(
 result = await process_paper_pipeline("paper.pdf", config=config)
 ```
 
-### 批量处理
+### Batch Processing
 
 ```python
 import asyncio
@@ -148,36 +148,36 @@ async def batch_process():
     
     for pdf_file in pdf_files:
         result = await process_paper_pipeline(str(pdf_file))
-        print(f"处理 {pdf_file.name}: {'成功' if result.success else '失败'}")
+        print(f"Processing {pdf_file.name}: {'Success' if result.success else 'Failed'}")
 
 asyncio.run(batch_process())
 ```
 
-## 🤝 贡献指南
+## 🤝 Contributing Guidelines
 
-1. Fork 本仓库
-2. 创建特性分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 开启 Pull Request
+1. Fork this repository
+2. Create a feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
-## 📄 许可证
+## 📄 License
 
-本项目采用 MIT 许可证 - 查看 [LICENSE](LICENSE) 文件了解详情。
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 🙏 致谢
+## 🙏 Acknowledgments
 
-- [MinerU](https://github.com/opendatalab/MinerU) - 高质量PDF OCR服务
-- [Mistral AI](https://mistral.ai/) - 强大的LLM API服务
-- [Gradio](https://gradio.app/) - 简单易用的Web界面框架
+- [MinerU](https://github.com/opendatalab/MinerU) - High-quality PDF OCR service
+- [Mistral AI](https://mistral.ai/) - Powerful LLM API service
+- [Gradio](https://gradio.app/) - Simple and easy-to-use web interface framework
 
-## 📞 联系方式
+## 📞 Contact
 
-如有问题或建议，请通过以下方式联系：
+If you have questions or suggestions, please contact us through:
 
-- 提交 [Issue](https://github.com/Rostopher/llm_read_paper/issues)
-- 发起 [Discussion](https://github.com/Rostopher/llm_read_paper/discussions)
+- Submit an [Issue](https://github.com/Rostopher/llm_read_paper/issues)
+- Start a [Discussion](https://github.com/Rostopher/llm_read_paper/discussions)
 
 ---
 
-**由 Claude 4.0 Opus 协助开发** 🤖
+**Developed with assistance from Claude 4.0 Opus** 🤖
